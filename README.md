@@ -63,12 +63,12 @@ Freeze.rs was developed in Rust.
 
 ## Install
 
-If Rust is not installed please install it from here. If you are compiling it from OSX or Linux sure you have the target "x86_64-pc-windows-gnu" added. To so run the following command:
+If `Rust` and `Rustup` is not installed please install them. If you are compiling it from OSX or Linux sure you have the target "x86_64-pc-windows-gnu" added. To so run the following command:
 ```
 rustup target add x86_64-pc-windows-gnu
 ```
 
-Once done you can compile Freeze.rs, run the following commands (assuming Rust installed), or use the compiled binary:
+Once done you can compile Freeze.rs, run the following commands, or use the compiled binary:
 ```
 cargo build --release
 ```
@@ -78,6 +78,7 @@ From there the compiled version will be found in in target/release (note if you 
 ## Help
 
 ```
+
     ___________                                                      
     \_   _____/______   ____   ____ ________ ____     _______  ______
      |    __) \_  __ \_/ __ \_/ __ \\___   // __ \    \_  __ \/  ___/
@@ -98,6 +99,9 @@ FLAGS:
     -h, --help       Prints help information
     -n, --noetw      Disables the ETW patching that prevents ETW events from being generated.
     -s, --sandbox    Enables sandbox evasion by checking:
+                                 Is Endpoint joined to a domain?
+                                 Does the Endpoint have more than 2 CPUs?
+                                 Does the Endpoint have more than 4 gigs of RAM?
     -V, --version    Prints version information
 
 OPTIONS:

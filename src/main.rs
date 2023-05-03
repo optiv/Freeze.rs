@@ -56,7 +56,10 @@ fn main() {
         .arg(Arg::with_name("sandbox")
             .short("s")
             .long("sandbox")
-            .help("Enables sandbox evasion by checking:"))
+            .help("Enables sandbox evasion by checking:
+            Is Endpoint joined to a domain?
+            Does the Endpoint have more than 2 CPUs?
+            Does the Endpoint have more than 4 gigs of RAM?"))
         .arg(Arg::with_name("export")
             .short("export")
             .long("export")
@@ -131,7 +134,11 @@ fn buildfile(project_name: &str, console: bool, sandbox: bool, etw: bool) {
     let original_path = env::current_dir().unwrap();
     let project_path = original_path.join(project_name);
     env::set_current_dir(&project_path).expect("Failed to change directory to Rust project");
-    let mut args = vec!["build", "--release", "--target", "x86_64-pc-windows-gnu"];
+    let mut args = if cfg!(target_os = "windows") {
+        vec!["build", "--release"]
+    } else {
+        vec!["build", "--release", "--target", "x86_64-pc-windows-gnu"]
+    };
     args.push("--quiet");
     
     let mut features = String::new();
@@ -172,11 +179,18 @@ fn buildfile(project_name: &str, console: bool, sandbox: bool, etw: bool) {
 pub fn cleanup(project_name: &str, file_name: &str) {
     let original_path = env::current_dir().unwrap();
     let project_path = original_path.join(project_name);
-    let compiled_file = project_path
-        .join("target")
-        .join("x86_64-pc-windows-gnu")
-        .join("release")
-        .join(format!("{}", file_name));
+    let compiled_file = if cfg!(target_os = "windows") {
+        project_path
+            .join("target")
+            .join("release")
+            .join(format!("{}", file_name))
+    } else {
+        project_path
+            .join("target")
+            .join("x86_64-pc-windows-gnu")
+            .join("release")
+            .join(format!("{}", file_name))
+    };
     if !compiled_file.exists() {
         eprintln!("Error: Compiled file not found");
         std::process::exit(1);
