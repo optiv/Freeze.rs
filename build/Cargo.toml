@@ -1,0 +1,24 @@
+[package]
+name = "build"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+winapi = {version = "0.3.9", features = ["psapi", "processthreadsapi","winnt","winbase", "impl-default", "memoryapi","winnt", "winbase"]}
+ntapi = "0.4.0"
+winproc = "0.6.4"
+pelite = "0.9.1"
+libaes = "0.6.1"
+rand = "0.8.4"
+base64 = "0.13.0"
+aes = "0.7.0"
+block-modes = "0.8.1"
+xz2 = "0.1.6"
+
+lib = { path = "../lib" }
+
+[lib]
+name = "build"
+path = "src/build.rs"
