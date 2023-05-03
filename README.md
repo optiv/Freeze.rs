@@ -38,7 +38,7 @@ ETW utilizes built-in syscalls to generate this telemetry. Since ETW is also a n
 
 ### Shellcode
 
-Since only Ntdll.dll is restored, all subsequent calls to execute shellcode need to reside in Ntdll.dll. Using Rust's NTAPI Crate (note you can do this in other languages but in Rust, its quite easy to implement) we can define and call the NT syscalls needed to allocate, write, and protect the shellcode, effectively skipping the standard calls that are located in Kernel32d.dll, and Kernelbase.dll, as these may still be hooked. 
+Since only Ntdll.dll is restored, all subsequent calls to execute shellcode need to reside in Ntdll.dll. Using Rust's NTAPI Crate (note you can do this in other languages but in Rust, its quite easy to implement) we can define and call the NT syscalls needed to allocate, write, and protect the shellcode, effectively skipping the standard calls that are located in Kernel32.dll, and Kernelbase.dll, as these may still be hooked. 
 
 
 <p align="center"> <img src=Screenshots/Syscalls.png border="2px solid #555">
