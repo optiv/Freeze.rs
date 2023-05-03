@@ -59,7 +59,7 @@ This started out a fun project to learn Rust and has grown into its own framewor
 
 
 ## Contributing
-Freeze.rs.rs was developed in Rust.
+Freeze.rs was developed in Rust.
 
 ## Install
 
